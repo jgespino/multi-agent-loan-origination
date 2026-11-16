@@ -1,0 +1,6 @@
+dependencies:
+- name: llm-service
+  repository: https://rh-ai-quickstart.github.io/ai-architecture-charts
+  version: 0.5.13
+digest: sha256:a8dcccf53b9692ee1c6a377c5433dcfaaa0ecae0c089bb42f84f6a4cb4ff12f4
+generated: "2026-11-16T10:45:47.265920409-08:00"
