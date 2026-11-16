@@ -80,6 +80,8 @@ help:
 	@echo ""
 	@echo "  Deployment (OpenShift):"
 	@echo "    deploy           Deploy application using Helm"
+	@echo "    deploy-xeon-model Deploy Xeon model serving"
+	@echo "    undeploy-xeon-model Remove Xeon model serving"
 	@echo "    undeploy         Remove application deployment"
 	@echo "    status           Show deployment status"
 	@echo "    debug            Show detailed diagnostics for failed deployments"
@@ -222,6 +224,13 @@ deploy: create-project push-images helm-dep-update
 	@echo "Deploying application using Helm..."
 	@scripts/deploy.sh
 
+deploy-xeon-model:
+	@echo "Deploying Xeon model serving..."
+	@bash ./deploy/helm/xeon-serving/deploy.sh
+
+undeploy-xeon-model:
+	@echo "Undeploying Xeon model serving..."
+	@bash ./deploy/helm/xeon-serving/deploy.sh --remove
 
 undeploy:
 	@echo "Undeploying application..."
@@ -286,4 +295,5 @@ helm-template: helm-dep-update
         containers-build containers-up containers-down containers-logs \
         build-images push-images smoke \
         create-project helm-dep-update deploy undeploy status debug \
+        deploy-xeon-model undeploy-xeon-model \
         helm-lint helm-template
