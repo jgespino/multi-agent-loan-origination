@@ -68,6 +68,7 @@ This quickstart demonstrates AI patterns for regulated industries including role
 - LLM access via either:
   - Model-as-a-Service (MaaS) endpoint (no GPU required on cluster), or
   - GPU node for on-cluster model serving (sized for your chosen model)
+  - Xeon deployments: one worker node with Intel Xeon processors, Sapphire Rapids (SPR) or newer (EMR/GNR)
 - Persistent volume claims: 10Gi for PostgreSQL, 10Gi for S4 object storage
 
 ### Minimum software requirements
@@ -143,6 +144,24 @@ make status      # Show deployment status
 make undeploy    # Remove deployment
 ```
 
+#### Optional: Deploy the LLM on Xeon
+
+To use an LLM running on Intel® Xeon®, deploy the model first:
+```bash
+make deploy-xeon-model
+```
+Then configure the LLM endpoint and model in `deploy/helm/mortgage-ai/values.yaml`:
+```bash
+  # LLM
+  LLM_API_KEY: "not-needed"
+  LLM_BASE_URL: "http://qwen3-30b-a3b-vllm.mortgage-ai.svc.cluster.local/v1"
+  LLM_MODEL: "Qwen/Qwen3-30B-A3B"
+```
+After the configuration is complete, deploy the application:
+```bash
+make deploy
+```
+
 ### Delete
 
 To tear down the local development environment:
@@ -156,6 +175,11 @@ For OpenShift:
 
 ```bash
 make undeploy   # Remove Helm deployment
+```
+
+If the LLM was deployed on Intel® Xeon®, remove the deployment with:
+```bash
+make undeploy-xeon-model
 ```
 
 ## References
