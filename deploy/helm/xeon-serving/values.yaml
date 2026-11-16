@@ -1,0 +1,32 @@
+global:
+  models:
+    qwen3-30b-a3b:
+      id: Qwen/Qwen3-30B-A3B
+      enabled: true
+llm-service:
+  device: xeon
+  deviceConfigs:
+    xeon:
+      resources:
+        requests:
+          cpu: "64"
+          memory: 128Gi
+        limits:
+          cpu: "64"
+          memory: 128Gi
+  models:
+    qwen3-30b-a3b:
+      id: Qwen/Qwen3-30B-A3B
+      enabled: true
+      args:
+        - --max-model-len
+        - "16384"
+        - --max-num-seqs
+        - "8"
+        - --dtype
+        - bfloat16
+        - --tensor-parallel-size
+        - "2"
+        - --enable-auto-tool-choice
+        - --tool-call-parser
+        - hermes
