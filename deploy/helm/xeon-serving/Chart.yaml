@@ -1,0 +1,9 @@
+apiVersion: v2
+name: xeon-serving
+description: Xeon model serving
+type: application
+version: 0.1.0
+dependencies:
+  - name: llm-service
+    version: 0.5.13
+    repository: https://rh-ai-quickstart.github.io/ai-architecture-charts
