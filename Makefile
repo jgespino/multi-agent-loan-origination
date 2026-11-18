@@ -224,7 +224,7 @@ deploy: create-project push-images helm-dep-update
 	@echo "Deploying application using Helm..."
 	@scripts/deploy.sh
 
-deploy-xeon-model:
+deploy-xeon-model: create-project
 	@echo "Deploying Xeon model serving..."
 	@bash ./deploy/helm/xeon-serving/deploy.sh
 
