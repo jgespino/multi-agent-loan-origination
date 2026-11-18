@@ -14,6 +14,13 @@ llm-service:
         limits:
           cpu: "64"
           memory: 128Gi
+      env:
+      - name: VLLM_CPU_KVCACHE_SPACE
+        value: "16"
+      - name: LD_PRELOAD
+        value: /usr/lib64/libomp.so
+      - name: VLLM_CPU_OMP_THREADS_BIND
+        value: "auto"
   models:
     qwen3-30b-a3b:
       id: Qwen/Qwen3-30B-A3B
@@ -25,8 +32,6 @@ llm-service:
         - "8"
         - --dtype
         - bfloat16
-        - --tensor-parallel-size
-        - "2"
         - --enable-auto-tool-choice
         - --tool-call-parser
         - hermes
